@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wada-sil <wada-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/08 13:27:43 by wada-sil          #+#    #+#             */
-/*   Updated: 2024/06/09 18:36:57 by wada-sil         ###   ########.fr       */
+/*   Created: 2024/06/09 18:57:26 by wada-sil          #+#    #+#             */
+/*   Updated: 2024/06/09 19:00:19 by wada-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int	ft_isprint(int n)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	if (n >= 32 && n <= 126)
+	t_list	*tmp;
+
+	if (*lst == NULL)
 	{
-		return (1);
+		*lst = new;
+		return ;
 	}
-	return (0);
+	tmp = *lst;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = new;
 }
-
-/* int main(void)
-{
-	char str = 123;
-	printf("%i\n", ft_isprint(str));
-} */

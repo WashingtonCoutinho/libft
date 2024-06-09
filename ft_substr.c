@@ -6,7 +6,7 @@
 /*   By: wada-sil <wada-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 21:48:57 by wada-sil          #+#    #+#             */
-/*   Updated: 2024/06/08 17:37:29 by wada-sil         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:54:28 by wada-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,20 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*tmp;
 	size_t	i;
+	size_t strlen;
 
 	if (!s)
 		return (NULL);
+	strlen = ft_strlen(s);
+	if (start >= strlen)
+	{
+		return (ft_strdup(""));
+	}
+	if (len > strlen - start)
+		len = strlen - start;
 	tmp = malloc(sizeof(char) * (len + 1));
 	if (!tmp)
 		return (NULL);
-	if (start >= ft_strlen(s))
-	{
-		tmp[0] = '\0';
-		return (tmp);
-	}
 	i = 0;
 	while (i < len && s[start + i])
 	{

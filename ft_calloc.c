@@ -6,7 +6,7 @@
 /*   By: wada-sil <wada-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:04:11 by wada-sil          #+#    #+#             */
-/*   Updated: 2024/06/08 16:52:22 by wada-sil         ###   ########.fr       */
+/*   Updated: 2024/06/09 18:35:47 by wada-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ void	*ft_calloc(size_t num, size_t size)
 {
 	void	*ptr;
 
+	if (num == 0 || size == 0)
+		return(malloc(0));
+	if (num > SIZE_MAX / size)
+		return (NULL);
 	ptr = malloc(num * size);
 	if (!ptr)
 		return (NULL);

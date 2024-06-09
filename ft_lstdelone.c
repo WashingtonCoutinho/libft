@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wada-sil <wada-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/08 13:27:43 by wada-sil          #+#    #+#             */
-/*   Updated: 2024/06/09 18:36:57 by wada-sil         ###   ########.fr       */
+/*   Created: 2024/06/09 19:16:19 by wada-sil          #+#    #+#             */
+/*   Updated: 2024/06/09 19:21:13 by wada-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int	ft_isprint(int n)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	if (n >= 32 && n <= 126)
-	{
-		return (1);
-	}
-	return (0);
+	del(lst->content);
+	free(lst);
 }
-
-/* int main(void)
-{
-	char str = 123;
-	printf("%i\n", ft_isprint(str));
-} */

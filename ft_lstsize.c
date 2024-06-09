@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wada-sil <wada-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/08 13:27:43 by wada-sil          #+#    #+#             */
-/*   Updated: 2024/06/09 18:36:57 by wada-sil         ###   ########.fr       */
+/*   Created: 2024/06/09 19:23:24 by wada-sil          #+#    #+#             */
+/*   Updated: 2024/06/09 19:25:26 by wada-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
-int	ft_isprint(int n)
+t_list	*ft_lstsize(t_list *lst)
 {
-	if (n >= 32 && n <= 126)
+	int	len;
+
+	len = 0;
+	while (lst)
 	{
-		return (1);
+		len++;
+		lst = lst->next;
 	}
-	return (0);
+	return (len);
 }
-
-/* int main(void)
-{
-	char str = 123;
-	printf("%i\n", ft_isprint(str));
-} */
