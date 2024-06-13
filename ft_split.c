@@ -6,11 +6,26 @@
 /*   By: wada-sil <wada-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:24:29 by wada-sil          #+#    #+#             */
-/*   Updated: 2024/06/11 23:14:36 by wada-sil         ###   ########.fr       */
+/*   Updated: 2024/06/13 18:02:46 by wada-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static void	ft_free_split(char **split)
+{
+	size_t	i;
+
+	if (!split)
+		return ;
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
 
 static void	ft_alloc(char **split, const char *s, char c)
 {
@@ -29,6 +44,8 @@ static void	ft_alloc(char **split, const char *s, char c)
 		if (*str == c || str > s)
 		{
 			*chops = ft_substr(s, 0, str - s);
+			if (!*chops)
+				ft_free_split(split);
 			s = str;
 			chops++;
 		}
