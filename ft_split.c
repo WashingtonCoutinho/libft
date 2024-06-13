@@ -6,7 +6,7 @@
 /*   By: wada-sil <wada-sil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 15:24:29 by wada-sil          #+#    #+#             */
-/*   Updated: 2024/06/13 18:02:46 by wada-sil         ###   ########.fr       */
+/*   Updated: 2024/06/13 23:27:18 by wada-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ static void	ft_free_split(char **split)
 	free(split);
 }
 
-static void	ft_alloc(char **split, const char *s, char c)
+static char	**ft_alloc(char **split, const char *s, char c)
 {
-	char		**chops;
+	char		**subs;
 	const char	*str;
 
-	chops = split;
+	subs = split;
 	str = s;
 	while (*str)
 	{
@@ -43,31 +43,32 @@ static void	ft_alloc(char **split, const char *s, char c)
 			str++;
 		if (*str == c || str > s)
 		{
-			*chops = ft_substr(s, 0, str - s);
-			if (!*chops)
-				ft_free_split(split);
+			*subs = ft_substr(s, 0, str - s);
+			if (!*subs)
+				return (ft_free_split(split), NULL);
 			s = str;
-			chops++;
+			subs++;
 		}
 	}
-	*chops = NULL;
+	*subs = NULL;
+	return (split);
 }
 
-static size_t	ft_count_chops(const char *s, char c)
+static size_t	ft_count_subs(const char *s, char c)
 {
-	size_t	chops;
+	size_t	subs;
 
-	chops = 0;
+	subs = 0;
 	while (*s)
 	{
 		while (*s == c)
 			s++;
 		if (*s)
-			chops++;
+			subs++;
 		while (*s && *s != c)
 			s++;
 	}
-	return (chops);
+	return (subs);
 }
 
 char	**ft_split(char const *s, char c)
@@ -77,11 +78,11 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	size = ft_count_chops(s, c);
+	size = ft_count_subs(s, c);
 	split = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!split)
 		return (NULL);
-	ft_alloc(split, s, c);
+	split = ft_alloc(split, s, c);
 	return (split);
 }
 
